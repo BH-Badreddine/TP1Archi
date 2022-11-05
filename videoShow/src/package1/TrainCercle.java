@@ -2,7 +2,7 @@ package package1;
 
 import java.awt.Graphics;
 
-public class TrainCercle implements IObjetDessinable {
+public class TrainCercle implements IObjetDessinable, IObjetAnimable {
 
 	 //------- variables d'instance (attributs) --------------------------
     /**
@@ -88,7 +88,7 @@ public class TrainCercle implements IObjetDessinable {
      * angle de plus ou moins 30 degrés. Si le d�but du train atteint un
      * des bords , sa pointe est alors dévié de 90°.
      */
-   
+    @Override
     public void deplacer() {
         if (lesCercles.length > 0) {
             // fait avancer les anneaux.

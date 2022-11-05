@@ -28,8 +28,10 @@ public class LancerApp1 {
 		
 		// les trains de cercles avec image et en couleur
 		TrainCercle[] lesTrains= new TrainCercle[10];
-		lesTrains[0] = new TrainCercleImage(d, 10, imgVador); d.ajouterObjet(lesTrains[0]);
-		lesTrains[1] = new TrainCercleImage(d, 10, imgLeila); d.ajouterObjet(lesTrains[1]);
+		lesTrains[0] = new TrainCercleImage(d, 10, imgVador); 
+		d.ajouterObjet(lesTrains[0]);
+		lesTrains[1] = new TrainCercleImage(d, 10, imgLeila); 
+		d.ajouterObjet(lesTrains[1]);
 		for (int i = 2; i < 10; i++) {
 			lesTrains[i] = new TrainCercleCouleur(new Color((float) Math.random(), (float) Math.random(),
 		(float) Math.random()), d, 10, 10);

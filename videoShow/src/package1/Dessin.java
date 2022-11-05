@@ -1,6 +1,7 @@
 package package1;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -82,9 +83,12 @@ public class Dessin extends JPanel{
     public void animer() {
         //  dessiner les Objets que contient le dessin
         for (IObjetDessinable o : listeDess) {
-        	o.deplacer();
-            
+        	if(o instanceof IObjetAnimable ) {
+        		IObjetAnimable objA = (IObjetAnimable) o ;
+        		objA.deplacer();
+        	}
         }
+        
     }
 
 }
