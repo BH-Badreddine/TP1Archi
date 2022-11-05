@@ -2,7 +2,7 @@ package package1;
 
 import java.awt.Graphics;
 
-public class TrainCercle {
+public class TrainCercle implements IObjetDessinable {
 
 	 //------- variables d'instance (attributs) --------------------------
     /**
@@ -73,6 +73,7 @@ public class TrainCercle {
      * C'est cet objet qui gère le "contexte graphique" pour cette fenêtre.
      */
  
+    @Override
     public void dessiner(Graphics g) {
         // dessiner la tête
     	leDebut.dessiner(g);
