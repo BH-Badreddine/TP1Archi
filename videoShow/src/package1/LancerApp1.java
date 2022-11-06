@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 public class LancerApp1 {
 
+
 	public static void main(String[] args) throws IOException {
 		
 		BufferedImage imgVador= ImageIO.read(new File("images/person2.png"));
@@ -40,6 +41,12 @@ public class LancerApp1 {
 		// dessiner un visage
 		Visage v = new Visage(d);
 		d.ajouterObjet(v);
+		//dessiner une étoile verte-->Color RGB(0,255,0)
+		Etoile e = new Etoile(220,230,16,(float)1.5,new Color(0,255,0),new Color(0,255,0));
+		d.ajouterObjet(e);
+		//dessiner un polygone noire-->Color RGB(0,0,0)
+		PolygoneRegulier p = new PolygoneRegulier(5,350,260,30,(float)1.5,new Color(0,0,0),new Color(0,0,0));
+		d.ajouterObjet(p);
 		
 		while(true) {
 		// la zone de dessin se réaffiche
