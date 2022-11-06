@@ -43,5 +43,6 @@ public class PolygoneRegulier extends FormeCirculaireReguliere implements IObjet
         leContour.closePath();
         return leContour;
     }
+   
 
 }

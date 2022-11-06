@@ -47,6 +47,15 @@ public class LancerApp1 {
 		//dessiner un polygone noire-->Color RGB(0,0,0)
 		PolygoneRegulier p = new PolygoneRegulier(5,350,260,30,(float)1.5,new Color(0,0,0),new Color(0,0,0));
 		d.ajouterObjet(p);
+		//dessiner une étoile jaune animée par un mvt circulaire
+		AnimationForme etoilJAnim = new AnimationForme(new Etoile(100,150,16,(float)2,new Color(255,255,0),new Color(255,255,0)),
+				new MvtCirculaire(80,200,80,45.5,20.3));
+		d.ajouterObjet(etoilJAnim);
+		//dessiner un polygone gris animé par un mvt circulaire
+		AnimationForme polyGAnim = new AnimationForme(new PolygoneRegulier(5,350,60,40,(float)2,new Color(128,128,128),new Color(128,128,128)),
+				new MvtCirculaire(350,100,80,45.5,20.3));
+		d.ajouterObjet(polyGAnim);
+		
 		
 		while(true) {
 		// la zone de dessin se réaffiche

@@ -52,5 +52,6 @@ public class Etoile extends FormeCirculaireReguliere implements IObjetDessinable
         leContour.closePath();
         return leContour;
     }
+    
 
 }

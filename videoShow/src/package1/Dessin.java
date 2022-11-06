@@ -45,7 +45,7 @@ public class Dessin extends JPanel{
             // on le rajoute a la liste des objets du dessin
         	listeDess.add(objD);
             // le dessin se rÃ©affiche
-            repaint();
+            repaint();//elle appelle la méthode "paintComponent" de cette classe "Dessin"
             this.pause(10);
         }
     }

@@ -1,6 +1,7 @@
 package package1;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * Une forme géométrique pouvant être affichée dans une zone de dessin.
@@ -73,4 +74,6 @@ public abstract class Forme {
         this.y = y;
     }
 
+    abstract public void dessiner(Graphics g);
+    
 }
