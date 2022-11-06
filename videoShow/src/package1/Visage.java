@@ -1,8 +1,11 @@
 package package1;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
 
-public class Visage implements IObjetAnimable{
+public class Visage extends FormeCirculaireReguliere{
 	 // ---------------------------------------------------------
     // Les constantes de la classe Visage
     // ---------------------------------------------------------
@@ -86,8 +89,8 @@ public class Visage implements IObjetAnimable{
      *
      * @param d la zone de dessin dans laquelle le visage rond se déplace
      */
-    public Visage(Dessin d) {
-        this(d, d.getLargeur() / 2, d.getHauteur() / 2, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);
+    public Visage(int nbSommets, int x, int y, int r, float epTrait, Color cTrait, Color cRemp,Dessin d) {
+    	this(nbSommets, x,  y, r, epTrait, cTrait,cRemp,d, d.getLargeur() / 2, d.getHauteur() / 2, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);    
     }
 
     /**
@@ -100,8 +103,8 @@ public class Visage implements IObjetAnimable{
      * @param xg abscisse du coin supérieur gauche du rectangle englobant.
      * @param yg ordonnée du coin supérieur gauche du rectangle englobant.
      */
-    public Visage(Dessin d, int xg, int yg) {
-        this(d, xg, yg, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);
+    public Visage(int nbSommets, int x, int y, int r, float epTrait, Color cTrait, Color cRemp,Dessin d, int xg, int yg) {
+        this( nbSommets, x,  y, r, epTrait, cTrait,cRemp,d, xg, yg, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);
 
     }
 
@@ -122,14 +125,15 @@ public class Visage implements IObjetAnimable{
      * @see VisageRond#LARGEUR_DEFAUT
      * @see VisageRond#HAUTEUR_DEFAUT
      */
-    public Visage(Dessin d, int xg, int yg, int larg, int haut) {
-        this.d = d;
+    public Visage(int nbSommets, int x, int y, int r, float epTrait, Color cTrait, Color cRemp,Dessin d, int xg, int yg, int larg, int haut) {
+    	super(nbSommets, x,  y, r, epTrait, cTrait,cRemp);
+    	this.d = d;
         this.xhg = xg;
         this.yhg = yg;
         this.largeur = Math.max(larg, LARGEUR_MIN);
         this.hauteur = Math.max(haut, HAUTEUR_MIN);
     }
-
+    
     /**
      * Donne la valeur du déplacement élémentaire horizontal.
      *
@@ -159,18 +163,18 @@ public class Visage implements IObjetAnimable{
     /**
      * Inverse sens du déplacement horizontal.
      */
-    public void inverserDx() {
+    /*public void inverserDx() {
         dx = -dx;
         this.changeExpression();
-    }
+    }*/
 
     /**
      * Inverse sens du déplacement vertical.
      */
-    public void inverserDy() {
+    /*public void inverserDy() {
         dy = -dy;
         this.changeExpression();
-    }
+    }*/
 
     /**
      * Inverse sens des déplacements horizontal et vertical.
@@ -194,10 +198,10 @@ public class Visage implements IObjetAnimable{
      * supérieur gauche du visage est modifiée en lui ajoutant le déplacement
      * élémentaire défini par dx et dy.
      */
-    public void deplacerSansRebond() {
+    /*public void deplacerSansRebond() {
         xhg += dx;
         yhg += dy;
-    }
+    }*/
 
     /**
      * Fait effectuer au visage un déplacement élementaire. La position du coin
@@ -205,7 +209,7 @@ public class Visage implements IObjetAnimable{
      * élémentaire défini par dx et dy. Si le visage dépasse de l'un des bords
      * de la zone de dessin il inverse sa direction de déplacement.
      */
-    @Override
+    /*@Override
 	public void deplacer() {
         if (bordGaucheAtteint() || bordDroitAtteint()) {
             inverserDx();
@@ -214,7 +218,7 @@ public class Visage implements IObjetAnimable{
             inverserDy();
         }
         deplacerSansRebond();
-    }
+    }*/
 
     /**
      * Evalue si le visage atteint le bord gauche de la zône de dessin.
@@ -281,6 +285,20 @@ public class Visage implements IObjetAnimable{
      * @see java.awt.Graphics
      * @see Dessinable
      */
+    @Override
+    protected Path2D construireContour(Point2D.Float[] tabSommets) {
+
+        // Etape 2
+        // construction du chemin reliant les points sur le cercle
+        Path2D leContour = new Path2D.Float();
+
+        leContour.moveTo(tabSommets[0].getX(), tabSommets[0].getY());
+        for (int i = 1; i < tabSommets.length; i++) {
+            leContour.lineTo(tabSommets[i].getX(), tabSommets[i].getY());
+        }
+        leContour.closePath();
+        return leContour;
+    }
     @Override
     public void dessiner(Graphics g) {
         // dessiner le contour du visage
