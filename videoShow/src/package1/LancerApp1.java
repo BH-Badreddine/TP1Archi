@@ -39,7 +39,7 @@ public class LancerApp1 {
 		d.ajouterObjet(lesTrains[i]);
 		}
 		// dessiner un visage avec un mouvement circulaire
-		AnimationForme visageCir = new AnimationForme(new Visage(5,120,90,50,(float)1.5,new Color(200,150,180),new Color(200,150,180),d),
+		AnimationForme visageCir = new AnimationForme(new Visage(40,120,(float)1.2,new Color(200,150,180),new Color(200,150,180),d),
 				new MvtCirculaire(180,500,80,45.5,20.3));
 		d.ajouterObjet(visageCir);
 		//dessiner une étoile verte-->Color RGB(0,255,0)

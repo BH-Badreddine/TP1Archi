@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 
-public class Visage extends FormeCirculaireReguliere{
+public class Visage extends Forme{
 	 // ---------------------------------------------------------
     // Les constantes de la classe Visage
     // ---------------------------------------------------------
@@ -89,8 +89,8 @@ public class Visage extends FormeCirculaireReguliere{
      *
      * @param d la zone de dessin dans laquelle le visage rond se déplace
      */
-    public Visage(int nbSommets, int x, int y, int r, float epTrait, Color cTrait, Color cRemp,Dessin d) {
-    	this(nbSommets, x,  y, r, epTrait, cTrait,cRemp,d, d.getLargeur() / 2, d.getHauteur() / 2, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);    
+    public Visage(int x, int y, float epaisseurTrait,Color couleurTrait,Color couleurRemplissage,Dessin d) {
+    	this( x, y,epaisseurTrait,couleurTrait,couleurRemplissage,d, d.getLargeur() / 2, d.getHauteur() / 2, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);    
     }
 
     /**
@@ -103,9 +103,8 @@ public class Visage extends FormeCirculaireReguliere{
      * @param xg abscisse du coin supérieur gauche du rectangle englobant.
      * @param yg ordonnée du coin supérieur gauche du rectangle englobant.
      */
-    public Visage(int nbSommets, int x, int y, int r, float epTrait, Color cTrait, Color cRemp,Dessin d, int xg, int yg) {
-        this( nbSommets, x,  y, r, epTrait, cTrait,cRemp,d, xg, yg, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);
-
+    public Visage(int x, int y, float epaisseurTrait,Color couleurTrait,Color couleurRemplissage,Dessin d, int xg, int yg) {
+        this(x, y,epaisseurTrait,couleurTrait,couleurRemplissage,d, xg, yg, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);
     }
 
     /**
@@ -125,8 +124,8 @@ public class Visage extends FormeCirculaireReguliere{
      * @see VisageRond#LARGEUR_DEFAUT
      * @see VisageRond#HAUTEUR_DEFAUT
      */
-    public Visage(int nbSommets, int x, int y, int r, float epTrait, Color cTrait, Color cRemp,Dessin d, int xg, int yg, int larg, int haut) {
-    	super(nbSommets, x,  y, r, epTrait, cTrait,cRemp);
+    public Visage(int x, int y, float epaisseurTrait,Color couleurTrait,Color couleurRemplissage,Dessin d, int xg, int yg, int larg, int haut) {
+    	super(x,y, epaisseurTrait, couleurTrait,couleurRemplissage);
     	this.d = d;
         this.xhg = xg;
         this.yhg = yg;
@@ -227,7 +226,7 @@ public class Visage extends FormeCirculaireReguliere{
      * le coté gauche de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordGaucheAtteint() {
+    /*public boolean bordGaucheAtteint() {
         return (xhg < 0);
     }
 
@@ -238,7 +237,7 @@ public class Visage extends FormeCirculaireReguliere{
      * le coté droit de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordDroitAtteint() {
+   /* public boolean bordDroitAtteint() {
         return ((xhg + largeur) > d.getLargeur());
     }
 
@@ -249,9 +248,9 @@ public class Visage extends FormeCirculaireReguliere{
      * le coté haut de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordHautAtteint() {
+    /*public boolean bordHautAtteint() {
         return (yhg < 0);
-    }
+    }*/
 
     /**
      * Evalue si le visage atteint le bord bas de la zône de dessin.
@@ -260,10 +259,10 @@ public class Visage extends FormeCirculaireReguliere{
      * le coté bas de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordBasAtteint() {
+   /* public boolean bordBasAtteint() {
         return ((yhg + hauteur) >= d.getHauteur());
     }
-
+  */
     /**
      * Evalue si le visage atteint l'un des bords de la zône de dessin.
      *
@@ -271,10 +270,10 @@ public class Visage extends FormeCirculaireReguliere{
      * l'un des cotés de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordAtteint() {
+    /*public boolean bordAtteint() {
         return bordDroitAtteint() || bordGaucheAtteint() || bordHautAtteint()
                 || bordBasAtteint();
-    }
+    }*/
 
     /**
      * affiche le visage.
@@ -285,20 +284,8 @@ public class Visage extends FormeCirculaireReguliere{
      * @see java.awt.Graphics
      * @see Dessinable
      */
-    @Override
-    protected Path2D construireContour(Point2D.Float[] tabSommets) {
-
-        // Etape 2
-        // construction du chemin reliant les points sur le cercle
-        Path2D leContour = new Path2D.Float();
-
-        leContour.moveTo(tabSommets[0].getX(), tabSommets[0].getY());
-        for (int i = 1; i < tabSommets.length; i++) {
-            leContour.lineTo(tabSommets[i].getX(), tabSommets[i].getY());
-        }
-        leContour.closePath();
-        return leContour;
-    }
+    
+    
     @Override
     public void dessiner(Graphics g) {
         // dessiner le contour du visage

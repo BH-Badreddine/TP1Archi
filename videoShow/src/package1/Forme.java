@@ -6,7 +6,7 @@ import java.awt.Graphics;
 /**
  * Une forme géométrique pouvant être affichée dans une zone de dessin.
  */
-public abstract class Forme {
+public abstract class Forme implements IObjetDessinable{
 
     /**
      * coordonnées du point de référence de la forme
