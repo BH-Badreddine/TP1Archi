@@ -54,6 +54,10 @@ public class LancerApp1 {
 				new MvtCirculaire(350,100,80,45.5,20.3));
 		d.ajouterObjet(polyGAnim);
 		
+		// dessiner un visage avec un mouvement circulaire
+				AnimationForme visageCir = new AnimationForme(new Visage(d),new MvtCirculaire(180,200,80,45.5,20.3));
+				d.ajouterObjet(visageCir);
+		
 		
 		while(true) {
 		// la zone de dessin se réaffiche
