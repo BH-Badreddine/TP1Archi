@@ -2,6 +2,7 @@ package package1;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 
@@ -89,8 +90,8 @@ public class Visage extends Forme{
      *
      * @param d la zone de dessin dans laquelle le visage rond se déplace
      */
-    public Visage(int x, int y, float epaisseurTrait,Color couleurTrait,Color couleurRemplissage,Dessin d) {
-    	this( x, y,epaisseurTrait,couleurTrait,couleurRemplissage,d, d.getLargeur() / 2, d.getHauteur() / 2, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);    
+    public Visage(Dessin d) {
+    	this(d, d.getLargeur() / 2, d.getHauteur() / 2, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);    
     }
 
     /**
@@ -103,8 +104,8 @@ public class Visage extends Forme{
      * @param xg abscisse du coin supérieur gauche du rectangle englobant.
      * @param yg ordonnée du coin supérieur gauche du rectangle englobant.
      */
-    public Visage(int x, int y, float epaisseurTrait,Color couleurTrait,Color couleurRemplissage,Dessin d, int xg, int yg) {
-        this(x, y,epaisseurTrait,couleurTrait,couleurRemplissage,d, xg, yg, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);
+    public Visage(Dessin d, int xg, int yg) {
+        this(d, xg, yg, LARGEUR_DEFAUT, HAUTEUR_DEFAUT);
     }
 
     /**
@@ -124,8 +125,8 @@ public class Visage extends Forme{
      * @see VisageRond#LARGEUR_DEFAUT
      * @see VisageRond#HAUTEUR_DEFAUT
      */
-    public Visage(int x, int y, float epaisseurTrait,Color couleurTrait,Color couleurRemplissage,Dessin d, int xg, int yg, int larg, int haut) {
-    	super(x,y, epaisseurTrait, couleurTrait,couleurRemplissage);
+    public Visage(Dessin d, int xg, int yg, int larg, int haut) {
+    	super(xg,yg, 0, null , null);
     	this.d = d;
         this.xhg = xg;
         this.yhg = yg;
@@ -288,25 +289,28 @@ public class Visage extends Forme{
     
     @Override
     public void dessiner(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
         // dessiner le contour du visage
-        g.drawOval(xhg, yhg, largeur, hauteur);
+        g2.drawOval(x, y, largeur, hauteur);
 
         // dessiner la bouche
         if (impassible) {
-            g.drawLine(xhg + largeur / 4, yhg + (2 * hauteur) / 3,
-                    xhg + (3 * largeur) / 4, yhg + (2 * hauteur) / 3);
+            g2.drawLine(x + largeur / 4, y + (2 * hauteur) / 3,
+                    x + (3 * largeur) / 4, y + (2 * hauteur) / 3);
         } else {
-            g.drawArc(xhg + largeur / 4, yhg + (2 * hauteur) / 3,
+            g2.drawArc(x + largeur / 4, y + (2 * hauteur) / 3,
                     largeur / 2, hauteur / 5, -45, -90);
         }
 
         // dessiner les yeux
         int largeurOeil = largeur / 5;
         int hauteurOeil = hauteur / 5;
-        g.drawOval(xhg + largeurOeil, yhg + hauteurOeil, largeurOeil,
+        g2.drawOval(x + largeurOeil, y + hauteurOeil, largeurOeil,
                 hauteurOeil);
-        g.drawOval(xhg + 3 * largeurOeil, yhg + hauteurOeil, largeurOeil,
+        g2.drawOval(x + 3 * largeurOeil, y + hauteurOeil, largeurOeil,
                 hauteurOeil);
 
     }
+
+    
 }
